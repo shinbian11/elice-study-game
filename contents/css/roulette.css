@@ -70,8 +70,10 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 15px;
   background-color: aquamarine;
 }
 .userText {
@@ -80,13 +82,29 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: 10px;
 }
 
 .userText p {
   margin-bottom: 15px;
+  font-size: 20px;
 }
 
-.userText input {
+.userText #customize {
   width: 90%;
+  height: 25px;
+  /* font-size: 18px; */
+}
+
+.customizeBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#addBtn,
+#startBtn {
+  width: 10%;
   height: 25px;
 }
