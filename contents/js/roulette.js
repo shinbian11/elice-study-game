@@ -111,7 +111,7 @@ class Roulette {
 
 const r = new Roulette();
 
-let panel = document.querySelector(".roulette-image");
+let panel = document.querySelector(".roulette-panel");
 let btn = document.querySelector(".roulette-btn");
 let result = document.querySelector(".result");
 let resultText = result.querySelectorAll("p");
@@ -122,8 +122,65 @@ btn.addEventListener("click", r.btnClick);
 
 // 참고한 링크
 // https://jnoony-code.tistory.com/19
+// https://lts0606.tistory.com/572?category=800911
 // https://ko.javascript.info/settimeout-setinterval
 // http://www.devdic.com/javascript/refer/dom/method:1585/animate()
 // https://webdir.tistory.com/506
 // https://webzz.tistory.com/369
 // https://api.jquery.com/animate/
+
+const canvas = document.querySelector(".roulette-panel");
+const ctx = canvas.getContext("2d");
+let width = canvas.width;
+let height = canvas.height;
+
+const devide = 8; //나눌 갯수 입니다
+const degree = 360; //원은 360도..ㅋ
+const goalDegree = 270 + degree / devide; //목표지점에서 끝부분 값 입니다
+
+let data = [];
+for (let i = 0; i < devide; i++) {
+  let json = {
+    first: (degree / devide) * i,
+    last: (degree / devide) * (i + 1),
+    text: i + 1,
+  };
+  data.push(json);
+}
+
+//#1. 부채꼴을 그립니다
+data.forEach((item) => {
+  ctx.save();
+  ctx.beginPath();
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "gray";
+  ctx.moveTo(width / 2, height / 2);
+  ctx.arc(
+    width / 2,
+    height / 2,
+    width / 2,
+    (Math.PI / 180) * item.first,
+    (Math.PI / 180) * item.last,
+    false
+  );
+  ctx.closePath();
+  ctx.stroke();
+  ctx.restore();
+});
+//#2. 가운에 원을 그립니다.
+ctx.save();
+ctx.beginPath();
+ctx.lineWidth = 2;
+ctx.fillStyle = "#B4B4B4";
+ctx.moveTo(width / 2, height / 2);
+ctx.arc(
+  width / 2,
+  height / 2,
+  width * 0.05,
+  (Math.PI / 180) * 0,
+  (Math.PI / 180) * 360,
+  false
+);
+ctx.closePath();
+ctx.fill();
+ctx.restore();
